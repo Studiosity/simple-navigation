@@ -24,9 +24,9 @@ describe SimpleNavigation::Renderer::List do
         HTML::Selector.new('ul.nav_dom_class').select(render).should have(1).entries
       end
       it "should render a li tag for each item" do
-        HTML::Selector.new('li').select(render).should have(3).entries
+        HTML::Selector.new('li').select(render).should have(4).entries
       end
-      it "should render an a-tag inside each li-tag" do
+      it "should render an a-tag inside each li-tag for each item that doesn't have an html_override_tag_as option" do
         HTML::Selector.new('li a').select(render).should have(3).entries
       end
 
@@ -58,6 +58,12 @@ describe SimpleNavigation::Renderer::List do
           it "should not apply the the default id where there is an id specified in the html_options for th li-element" do
             HTML::Selector.new('ul li#users').select(render).should be_empty
           end
+        end
+      end
+
+      context 'when html_override_tag_as is passed as an item option' do
+        it 'should render a tag as specified by the html_override_tag_as option instead of an anchor tag' do
+          HTML::Selector.new('li h3').select(render).should have(1).entires
         end
       end
       

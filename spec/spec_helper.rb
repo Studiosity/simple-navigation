@@ -1,6 +1,6 @@
 ENV["RAILS_ENV"] = "test"
 require 'rubygems'
-require 'rspec'
+# require 'rspec'
 require 'action_controller'
 
 module Rails
@@ -43,7 +43,8 @@ def primary_items
   [
     [:users, 'users', 'first_url', {:id => 'my_id'}],
     [:invoices, 'invoices', 'second_url', {}],
-    [:accounts, 'accounts', 'third_url', {:style => 'float:right', :link => {:style => 'float:left'}}]
+    [:accounts, 'accounts', 'third_url', {:style => 'float:right', :link => {:style => 'float:left'}}],
+    [:section_name, 'section name', '', {:override_html_tag_as => 'h3'}]
   ]
 end
 
