@@ -74,6 +74,9 @@ describe SimpleNavigation::Renderer::List do
         it "should also mark the links inside the selected li's as selected" do
           HTML::Selector.new('li.selected a.selected').select(render(:invoices)).should have(1).entries
         end
+        it 'adds a selected_item-ITEMKEY class to the parent ul' do
+          HTML::Selector.new('ul.selected_item-invoices').select(render(:invoices)).should have(1).entries
+        end
       end
 
       context 'without current_navigation set' do

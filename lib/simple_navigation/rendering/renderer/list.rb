@@ -11,7 +11,14 @@ module SimpleNavigation
     class List < SimpleNavigation::Renderer::Base
 
       def render(item_container)
+        selected_item_classes = ''
+
         list_content = item_container.items.inject([]) do |list, item|
+          #if this item is selected, add it to selected_items 
+          if item.selected?
+            selected_item_classes << " selected_item-#{item.key.to_s}"
+          end
+
           li_options = item.html_options.reject {|k, v| k == :link}
           if item.html_options[:override_html_tag_as]
             li_content = content_tag(item.html_options[:override_html_tag_as], item.name)
@@ -26,7 +33,7 @@ module SimpleNavigation
         if skip_if_empty? && item_container.empty?
           ''
         else  
-          content_tag(:ul, list_content, {:id => item_container.dom_id, :class => item_container.dom_class}) 
+          content_tag(:ul, list_content, {:id => item_container.dom_id, :class => [selected_item_classes, item_container.dom_class].join(' ')}) 
         end
       end
       
